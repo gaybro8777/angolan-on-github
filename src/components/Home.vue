@@ -25,7 +25,7 @@
 
 			<div class="column is-one-quarter">
 				<div class="field">
-					<input type="text" v-model="searchTerm" v-on:keyup.enter="LoadProfiles()" placeholder="Search by name" class="input">
+					<input type="text" v-model="searchTerm" v-on:keyup.enter="LoadProfiles()" v-on:blur="LoadProfiles()" placeholder="Search by name" class="input">
 				</div>
 			</div>
 		</div>
@@ -84,6 +84,7 @@
 			loading: Loading,
 		},
 		created() {
+			this.TotalUsers();
 			this.LoadProfiles();
 		},
 		methods: {
@@ -140,6 +141,18 @@
 				this.LoadProfiles();
 			},
 			/**
+			*	TotalUsers: This method get the total users matching Angola in their profiles
+			*/
+			TotalUsers() {
+				this.$http.get('https://api.github.com/search/users?q=location:Angola+location:luanda')
+					.then(
+						(users) => {
+							const data = JSON.parse(users.bodyText);
+							this.totalUsers = data.total_count;
+						},
+					);
+			},
+			/**
 			*	This method is responsible to load user's profiles.
 			*/
 			LoadProfiles() {
@@ -147,8 +160,6 @@
 				.then(
 					(users) => {
 						const data = JSON.parse(users.bodyText);
-						// Number of users found
-						this.totalUsers = data.total_count;
 						// Pagination is the result of total users found devided by
 						// the number of users listed per request which is 30
 						this.pagination = Math.round(data.total_count / 30) + 1;
