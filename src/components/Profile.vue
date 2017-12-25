@@ -77,6 +77,9 @@
 		components: {
 			loading: Loading,
 		},
+		/**
+		*	It start the first request to get information about a specific user.
+		*/
 		created() {
 			// Get username from url param
 			const username = this.$route.params.username;
@@ -96,6 +99,9 @@
 			);
 		},
 		methods: {
+			/**
+			*	Get all the repositories of a specific user.
+			*/
 			GetRepositories() {
 				// Get username from url param
 				const username = this.$route.params.username;
@@ -104,7 +110,6 @@
 				.then(
 					(repo) => {
 						this.repositories = JSON.parse(repo.bodyText).items;
-						console.log(repo.bodyText);
 					},
 					(err) => {
 						console.log(err);

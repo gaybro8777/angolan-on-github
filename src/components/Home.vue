@@ -87,6 +87,9 @@
 			this.LoadProfiles();
 		},
 		methods: {
+			/**
+			*	This method clears all sort and other options.
+			*/
 			Clear() {
 				// Show loading bar
 				this.showLoadBar = true;
@@ -105,6 +108,9 @@
 				// Hide options buttons
 				this.showOrdersBtn = false;
 			},
+			/**
+			*	This method order the results by ascending or descending.
+			*/
 			Order(orderName) {
 				// Set the new order
 				this.order = `&order=${orderName}`;
@@ -113,6 +119,9 @@
 				// Make the request in the API
 				this.LoadProfiles();
 			},
+			/**
+			*	This method Sorts make a request for sorted results.
+			*/
 			Sort(sortName, target) {
 				// Clear any background-color from previous actions
 				const t = document.querySelector('.is-success');
@@ -130,6 +139,9 @@
 				// Make the request in the API
 				this.LoadProfiles();
 			},
+			/**
+			*	This method is responsible to load user's profiles.
+			*/
 			LoadProfiles() {
 				this.$http.get(`https://api.github.com/search/users?q=${this.searchTerm} location:Angola+location:luanda&sort=${this.sort}${this.order}&per_page=30`)
 				.then(
@@ -150,6 +162,10 @@
 					},
 				);
 			},
+			/**
+			*	This method request more profiles and add the result to an existent array of users
+			*   loaded before.
+			*/
 			LoadMoreProfiles() {
 				/*
 				*	This method fecth more users from Github API
