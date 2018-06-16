@@ -3,7 +3,19 @@
 
 		<loading v-if="showLoadBar"></loading>
 
-		<h1 v-show="users" class="we-are title is-4">We are {{ totalUsers }} programmers and organizations based in <a href="https://en.wikipedia.org/wiki/Angola" title="Want to know more about Angola?">Angola</a> 🙌 👏.</h1>
+		<h1
+			v-show="users"
+			class="we-are title is-4"
+		>
+			We are {{ totalUsers }} developers and organizations based in
+			<a 
+				href="https://en.wikipedia.org/wiki/Angola"
+				title="Want to know more about Angola?"
+			>
+				Angola
+			</a>
+			🙌 👏.
+		</h1>
 
 		<!-- Sorts, Orders, -->
 		<div class="columns">
@@ -12,7 +24,9 @@
 					<!-- Sorts -->
 					<span class="tag" @click="Sort('followers', $event.target)">Followers</span>
 					<span class="tag" @click="Sort('joined', $event.target)">Joined date</span>
-					<span class="tag" @click="Sort('repositories', $event.target)">Number of repositories</span>
+					<span class="tag" @click="Sort('repositories', $event.target)">
+						Number of repositories
+					</span>
 
 					<!-- Orders -->
 					<span class="tag is-dark" @click="Order('asc')" title="Get results in ascending order" v-show="showOrdersBtn">Ascending</span>
